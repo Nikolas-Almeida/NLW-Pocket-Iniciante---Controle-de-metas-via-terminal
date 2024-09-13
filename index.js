@@ -1,5 +1,30 @@
 // Importanto a biblioteca 'inquirer', módulo 'select'
-const { select } = require('@inquirer/prompts')
+const { select, input } = require('@inquirer/prompts')
+
+let metas = [];
+
+const cadastrarMeta = async () => {
+    console.log('Digite "sair" para voltar ao menu')
+
+    // Recebendo a meta do usuário
+    const meta = await input({
+        message: 'Digite a meta: '
+    })
+
+    // Verificando se deseja sair ou se a meta é vazia
+    if(meta == "sair") {
+        console.log('Retornando ao menu...')
+        return
+    } else if (meta.length == 0) {
+        console.log('A meta não pode ser vazia\n');
+        return cadastrarMeta();
+    }
+
+    // Adicionando a meta à lista de metas
+    metas.push({
+        value: meta, checked: false
+    })
+}
 
 const start = async () => {
     while(true) {
@@ -25,7 +50,8 @@ const start = async () => {
         // Verificando a opção escolhida
         switch(opcao) {
             case 'cadastrar':
-                console.log('Vamos cadastrar');
+                await cadastrarMeta();
+                console.log(metas)
                 break;
             case 'listar':
                 console.log('Vamos listar');

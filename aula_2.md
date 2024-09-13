@@ -3,6 +3,7 @@
 
 # Condicionais
 - switch
+- if/else
 
 # Módulos em node.js
 - Importação de módulos (require, CommonJS)
