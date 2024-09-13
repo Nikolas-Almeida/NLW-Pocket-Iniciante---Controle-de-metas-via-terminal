@@ -1,9 +1,16 @@
-// Hello Word!
-const mensagem = 'Hello Word!'
-
-{
-    const mensagem = 'Olá mundo!'
-    console.log(mensagem)
+// Arrays, objetos
+let meta = {
+    value: 'Ler 1 livro por mês',
+    address: 2,
+    cheacked: true,
+    log: (info) => {
+        console.log(info);
+    }
 }
 
-console.log(mensagem)
+meta.log(meta.value)
+meta.value = 'Caminhar 30 minutos por dia'
+meta.log(meta.value)
+
+// Arrow function
+const criarMeta = () => {}
