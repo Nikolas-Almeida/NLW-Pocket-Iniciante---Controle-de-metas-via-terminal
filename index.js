@@ -35,16 +35,16 @@ const listarMetas = async () => {
         instructions: false
     })
 
+    // Marcando as metas como não concluídas para poder desmarcar as desejadas
+    metas.forEach((m) => {
+        m.checked = false
+    })
+
     // Verificando se existe alguma meta cadastrada
     if(respostas.length == 0) {
         console.log('Nenhuma meta selecionada')
         return
     }
-
-    // Marcando as metas como não concluídas para poder desmarcar as desejadas
-    metas.forEach((m) => {
-        m.checked = false
-    })
 
     /*
     Marcando as metas selecionadas como concluídas
