@@ -1,15 +1,9 @@
-let meta = {
-    value: 'Ler 1 livro por mês',
-    checked: true
+function start() {
+    let count = 0;
+    while(count < 10) {
+        console.log(count);
+        count++;
+    }
 }
 
-let metas = [
-    meta,
-    {
-        value: 'Ler 2 livros por mês',
-        checked: false
-    }
-]
-
-console.log(meta.value)
-console.log(metas[1].value)
+start()
