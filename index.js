@@ -1,8 +1,24 @@
 // Importanto a biblioteca 'inquirer', módulo 'select'
 const { select, input, checkbox } = require('@inquirer/prompts')
+// Importando a biblioteca para trabalhar com json
+const fs = require('fs').promises
 
-let metas = [];
 let mensagem = 'Bem vindo ao app de metas!';
+let metas = [];
+
+const carregarMetas = async () => {
+    try {
+        const dados = await fs.readFile("metas.json", "utf8")
+        metas = JSON.parse(dados)
+    }
+    catch(erro) {
+        metas = []
+    }
+}
+
+const salvarMetas = async () => {
+    await fs.writeFile("metas.json", JSON.stringify(metas, null, 2))
+}
 
 const cadastrarMeta = async () => {
     console.log('Digite "sair" para voltar ao menu')
@@ -145,7 +161,9 @@ const mostrarMensagem = () => {
 }
 
 const start = async () => {
+    await carregarMetas();
     while(true) {
+        await salvarMetas();
         mostrarMensagem();
         // Recebendo a opção do usuário
         const opcao = await select({
@@ -182,9 +200,11 @@ const start = async () => {
         switch(opcao) {
             case 'cadastrar':
                 await cadastrarMeta();
+                await salvarMetas();
                 break;
             case 'listar':
                 await listarMetas();
+                await salvarMetas();
                 break;
             case 'realizadas':
                 await metasRealizadas();
