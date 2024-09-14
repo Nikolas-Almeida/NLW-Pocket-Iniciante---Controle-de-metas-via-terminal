@@ -47,6 +47,12 @@ const cadastrarMeta = async () => {
 }
 
 const listarMetas = async () => {
+    // Verifica se existe alguma meta
+    if(metas.length == 0) {
+        mensagem = 'Nenhuma meta cadastrada'
+        return
+    }
+
     // Exibindo as metas cadastradas
     const respostas = await checkbox({
         message: 'Use as setas para mudar de meta; \nEspaço para marcar ou desmarcar; \nEnter para finalizar essa etapa',
@@ -120,6 +126,11 @@ const metasAbertas = async () => {
 }
 
 const deletarMeta = async () => {
+    if(metas.length == 0) {
+        mensagem = 'Nenhuma meta para deletar'
+        return
+    }
+
     // Transformando todas as metas em desmarcadas
     const metasDesmarcadas = metas.map((meta) => {
         return {value: meta.value, checked: false}
