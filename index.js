@@ -62,18 +62,40 @@ const listarMetas = async () => {
 }
 
 const metasRealizadas = async () => {
+    // Verificando quais metas estão marcadas como true
     const realizadas = metas.filter((meta) => {
         return meta.checked
     })
 
+    // Verifica se não existe metas realizadas
     if(realizadas.length == 0) {
         console.log('Nenhuma meta realizada :(')
         return
     }
 
+    // Exibindo as metas realizadas
     await select({
         message: 'Metas realizadas:',
         choices: [...realizadas],
+        instructions: false
+    })
+}
+
+const metasAbertas = async () => {
+    // Verificando quais metas estão marcadas como false
+    const abertas = metas.filter((meta) => {
+        return !meta.checked
+    })
+
+    // Verificando se tem alguma meta aberta
+    if(abertas.length == 0) {
+        console.log('Todas as metas foram realizadas :)')
+        return
+    }
+
+    await select({
+        message: 'Metas abertas:',
+        choices: [...abertas],
         instructions: false
     })
 }
@@ -97,6 +119,10 @@ const start = async () => {
                     value: 'realizadas'
                 },
                 {
+                    name: 'Metas abertas',
+                    value: 'abertas'
+                },
+                {
                     name: 'Sair',
                     value: 'sair'
                 }
@@ -113,6 +139,9 @@ const start = async () => {
                 break;
             case 'realizadas':
                 await metasRealizadas();
+                break;
+            case 'abertas':
+                await metasAbertas();
                 break;
             case 'sair':
                 console.log('Até logo!');
